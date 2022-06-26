@@ -49,19 +49,6 @@ app.layout = html.Div(
     """
         ),
         # chart 1
-        # dropdown
-        html.Div(
-            [
-                html.H3(children="Płeć", className="card"),
-                dcc.Dropdown(
-                    df["Płeć"].unique(),
-                    df["Płeć"].unique(),
-                    id="gender-selection",
-                    multi=True,
-                ),
-            ]
-        ),
-        html.Br(),
         # date slider
         html.Div([
             html.H3(children="Miesiąc", className="card"),
@@ -75,7 +62,33 @@ app.layout = html.Div(
                 end_date=date(2021, 12, 1)
             )
         ]),
+        html.Br(),
+        # dropdown plec
+        html.Div(
+            [
+                html.H3(children="Płeć", className="card"),
+                dcc.Dropdown(
+                    df["Płeć"].unique(),
+                    df["Płeć"].unique(),
+                    id="gender-selection",
+                    multi=True,
+                ),
+            ]
+        ),
         html.Div(dcc.Graph(id="chart_plc_mo")),
+        html.Br(),
+        # dropdown wojewodztwo
+        html.Div(
+            [
+                html.H3(children="Województwo", className="card"),
+                dcc.Dropdown(
+                    df[df.Nazwa != 'POLSKA']["Nazwa"].unique(),
+                    df[df.Nazwa != 'POLSKA']["Nazwa"].unique(),
+                    id="voivodship-selection",
+                    multi=True,
+                ),
+            ]
+        ),
         html.Div(dcc.Graph(id="chart_woj_mo")),
         #html.Div(dash_table.DataTable(id="tbl")),
 
@@ -92,7 +105,7 @@ app.layout = html.Div(
 
 # decorator that enables reactivity
 @app.callback(
-    Output("chart_mo_plc", "figure"),
+    Output("chart_plc_mo", "figure"),
     [Input("gender-selection", "value"), Input("month-selection", "start_date"), Input("month-selection", "end_date")],
 )
 def update_graph_plc(selected_gender_value: str, month_selection_start: str, month_selection_end: str) -> Any:
@@ -122,6 +135,46 @@ def update_graph_plc(selected_gender_value: str, month_selection_start: str, mon
         y="Wartosc",
         color="Płeć",
         title="Bezrobocie według płci",
+        labels={
+            "Data": "Data",
+            "Wartosc": "Liczba bezrobotnych",
+        },
+    )
+    fig.update_layout(barmode="overlay")
+    return fig
+
+
+@app.callback(
+    Output("chart_woj_mo", "figure"),
+    [Input("voivodship-selection", "value"), Input("month-selection", "start_date"), Input("month-selection", "end_date")],
+)
+def update_graph_plc(selected_voivod_value: str, month_selection_start: str, month_selection_end: str) -> Any:
+    """
+    Updates the plot according to the selected values
+
+    :param selected_voivod_value:
+    :param month_selection_value:
+    :return: updated plotly figure
+    """
+    tmp = df.loc[  # pylint: disable=E1101
+        df.loc[:, "Nazwa"].isin(selected_voivod_value), :  # pylint: disable=E1101
+    ]
+    tmp = tmp[tmp.loc[:, "Data"] <= date.fromisoformat(month_selection_end)]
+    tmp = tmp[tmp.loc[:, "Data"] >= date.fromisoformat(month_selection_start)]
+    tmp = (
+        tmp.groupby(["Data", "Nazwa"])
+        .agg({"Wartosc": sum})
+        .reset_index()
+    )
+    # "dlugie obliczenia"
+    time.sleep(3)
+
+    fig = px.line(
+        tmp,
+        x="Data",
+        y="Wartosc",
+        color="Nazwa",
+        title="Bezrobocie według województwa",
         labels={
             "Data": "Data",
             "Wartosc": "Liczba bezrobotnych",
