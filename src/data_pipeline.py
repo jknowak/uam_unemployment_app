@@ -28,4 +28,4 @@ def prep_data() -> Tuple[pd.DataFrame, pd.DataFrame]:
         ["Płeć", "Rok", "Wartosc"],
     ]
 
-    return df_, df_2
+    return pd.DataFrame(df_), pd.DataFrame(df_2)
