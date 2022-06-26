@@ -56,8 +56,8 @@ def make_layout() -> html.Div:
                 [
                     html.H3(children="Płeć", className="card"),
                     dcc.Dropdown(
-                        df["Płeć"].unique(),
-                        df["Płeć"].unique(),
+                        df.Płeć.unique(),
+                        df.Płeć.unique(),
                         id="gender-selection",
                         multi=True,
                     ),
@@ -71,8 +71,8 @@ def make_layout() -> html.Div:
                 [
                     html.H3(children="Województwo", className="card"),
                     dcc.Dropdown(
-                        df[
-                            df.Nazwa != "POLSKA"
+                        df[  # pylint: disable=E1101, E1136
+                            df.Nazwa != "POLSKA"  # pylint: disable=E1101, E1136
                         ].Nazwa.unique(),  # pylint: disable=E1101, E1136
                         df[
                             df.Nazwa != "POLSKA"

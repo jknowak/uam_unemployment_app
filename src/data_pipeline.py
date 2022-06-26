@@ -23,7 +23,8 @@ def prep_data() -> Tuple[pd.DataFrame, pd.DataFrame]:
 
     df_2 = load_raw_data(f"data/raw_data/{FILE2}")
     df_2 = df_2.loc[
-        (df_2["Poziomy wykształcenia"] == "ogółem") & (df_2.Nazwa == "POLSKA"),
+        (df_2["Poziomy wykształcenia"] == "ogółem")  # pylint: disable=E1101, E1136
+        & (df_2.Nazwa == "POLSKA"),  # pylint: disable=E1101, E1136
         ["Płeć", "Rok", "Wartosc"],
     ]
 
