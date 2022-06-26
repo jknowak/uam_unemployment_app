@@ -17,6 +17,7 @@ RUN pip3 install -r requirements.txt
 
 # Copy the rest of the codebase into the image
 COPY . ./
-
+CMD ["ls"]
+CMD ["dir"]
 # Finally, run gunicorn.
-CMD [ "gunicorn", "--workers=5", "--threads=1", "-b 0.0.0.0:8000", "index:app"]
+CMD [ "gunicorn", "--workers=5", "--threads=1", "-b 0.0.0.0:8000", "index:server"]

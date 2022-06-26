@@ -2,7 +2,7 @@
 Testing simple filtering function
 
 """
-from app import filter_year_gender
+from helpers import filter_year_gender
 
 
 def test_male_data(example_data):  # pylint: disable=W0621
