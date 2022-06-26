@@ -7,15 +7,15 @@ import pandas as pd  # type: ignore
 
 
 @pytest.fixture(scope="session")
-def example_covid_data():
+def example_data():
     """
 
     :return:
     """
     with open(
-        "data/raw_data/ewp_dsh_zgony_po_szczep_20220127.csv",
+        "data/raw_data/bezrobocie_plec_miesiecznie.csv",
         encoding="utf8",
         errors="ignore",
     ) as file:
-        df_covid = pd.read_csv(file, sep=";")
-    return df_covid
+        df = pd.read_csv(file, sep=";")
+    return df

@@ -31,6 +31,25 @@ months_dict = {
     "listopad": 11,
     "grudzień": 12,
 }
+
+
+def filter_year_gender(df_input, year, gender):
+    """
+    :param df_input:
+    :param age:
+    :param gender:
+    :return:
+    """
+    if year is None:
+        year = (min(df_input.wiek), max(df_input.wiek))
+    if gender is None:
+        gender = df_input.Płeć.unique()
+    tmp = df_input.loc[df_input.loc[:, "Płeć"].isin(gender), :]  # pylint: disable=E1101
+    tmp = tmp[tmp.loc[:, "Rok"] <= year[1]]
+    tmp = tmp[tmp.loc[:, "Rok"] >= year[0]]
+    return tmp
+
+
 # źródło danych
 # https://bdl.stat.gov.pl/bdl/dane/podgrup/wymiary
 # https://bdl.stat.gov.pl/bdl/dane/podgrup/wymiary
