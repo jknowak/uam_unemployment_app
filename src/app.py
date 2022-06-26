@@ -29,7 +29,7 @@ with open(
 # App layout
 app.layout = html.Div(
     children=[
-        html.H1(children="Zgony na Covid a przyjęte dawki szczepień"),
+        html.H1(children="Bezrobocie w Polsce"),
         html.Div(
             children="""
         Aplikacja napisana w Dashu
@@ -95,7 +95,7 @@ def update_graph(selected_gender_value: str, age_selection_value: str) -> Any:
         x="dawka_ost",
         y="liczba_zaraportowanych_zgonow",
         color="dawka_ost",
-        title="Zgony według zaszczepienia",
+        title="Bezrobocie według wykształcenia",
         labels={
             "dawka_ost": "Zaszczepienie",
             "liczba_zaraportowanych_zgonow": "Liczba zgonów",
