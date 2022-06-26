@@ -19,7 +19,7 @@ app = Dash(__name__, assets_folder="../assets")
 
 months_dict = {'styczeń': 1, 'luty': 2, 'marzec': 3,
                'kwiecień': 4, 'maj': 5, 'czerwiec': 6,
-               'lipiec': 7,'sierpień': 8,'wrzesień': 9,
+               'lipiec': 7, 'sierpień': 8, 'wrzesień': 9,
                'październik': 10, 'listopad': 11, 'grudzień': 12}
 # źródło danych
 # https://bdl.stat.gov.pl/bdl/dane/podgrup/wymiary
