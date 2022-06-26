@@ -17,19 +17,26 @@ from dash.dependencies import Input, Output  # type: ignore
 app = Dash(__name__, assets_folder="../assets")
 
 # źródło danych
-# szczepienia.pzh.gov.pl/analiza-ryzyka-zgonu-wsrod-zaszczepionych-i-niezaszczepionych
+# https://bdl.stat.gov.pl/bdl/dane/podgrup/wymiary
+# https://bdl.stat.gov.pl/bdl/dane/podgrup/wymiary
 with open(
-    "data/raw_data/ewp_dsh_zgony_po_szczep_20220127.csv",
+    "data/raw_data/bezrobocie_plec_miesiecznie.csv",
     encoding="utf8",
     errors="ignore",
 ) as f:
-    df: pd.DataFrame = pd.read_csv(f, sep=";")
+    df1: pd.DataFrame = pd.read_csv(f, sep=";")
 
+with open(
+    "data/raw_data/bezrobocie_wyksz_plec_lata.csv",
+    encoding="utf8",
+    errors="ignore",
+) as f:
+    df2: pd.DataFrame = pd.read_csv(f, sep=";")
 
 # App layout
 app.layout = html.Div(
     children=[
-        html.H1(children="Zgony na Covid a przyjęte dawki szczepień"),
+        html.H1(children="Bezrobocie w Polsce przed pandemią i po pandemii COVID-19"),
         html.Div(
             children="""
         Aplikacja napisana w Dashu
