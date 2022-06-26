@@ -107,8 +107,8 @@ app.layout = html.Div(
                 page_current=0,
                 page_size=20,
                 column_selectable='multi',
-                row_selectable='multi',
-                row_deletable=True
+                #row_selectable='multi',
+                #row_deletable=True
             )
         ])
         # chart 3
