@@ -75,7 +75,8 @@ app.layout = html.Div(
                 end_date=date(2021, 12, 1)
             )
         ]),
-        html.Div(dcc.Graph(id="chart")),
+        html.Div(dcc.Graph(id="chart_plc_mo")),
+        html.Div(dcc.Graph(id="chart_woj_mo")),
         #html.Div(dash_table.DataTable(id="tbl")),
 
         # chart 2
@@ -91,10 +92,10 @@ app.layout = html.Div(
 
 # decorator that enables reactivity
 @app.callback(
-    Output("chart", "figure"),
+    Output("chart_mo_plc", "figure"),
     [Input("gender-selection", "value"), Input("month-selection", "start_date"), Input("month-selection", "end_date")],
 )
-def update_graph_1(selected_gender_value: str, month_selection_start: str, month_selection_end: str) -> Any:
+def update_graph_plc(selected_gender_value: str, month_selection_start: str, month_selection_end: str) -> Any:
     """
     Updates the plot according to the selected values
 
@@ -126,10 +127,9 @@ def update_graph_1(selected_gender_value: str, month_selection_start: str, month
             "Wartosc": "Liczba bezrobotnych",
         },
     )
-
     fig.update_layout(barmode="overlay")
-
     return fig
+
 
 
 if __name__ == "__main__":
