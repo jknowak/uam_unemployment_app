@@ -1,6 +1,6 @@
-## Example of dash app project
+## Unemployment in Poland, before and after the pandemic
 
-This is a dash app written as an example for the classes at the Adam Mickiewicz University.
+This is a dash app written for the classes at the Adam Mickiewicz University conducted by @psobczyk.
 
 ### How to run the app?
 
