@@ -117,8 +117,8 @@ app.layout = html.Div(
             [
                 html.H3(children="Województwo", className="card"),
                 dcc.Dropdown(
-                    df[df.Nazwa != "POLSKA"]["Nazwa"].unique(),
-                    df[df.Nazwa != "POLSKA"]["Nazwa"].unique(),
+                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),
+                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),
                     id="voivodship-selection",
                     multi=True,
                 ),
@@ -160,7 +160,7 @@ app.layout = html.Div(
         Input("gender-selection", "value"),
         Input("month-selection", "start_date"),
         Input("month-selection", "end_date"),
-    ],
+    ]
 )
 def update_graph_plc(
     selected_gender_value: str, month_selection_start: str, month_selection_end: str
@@ -221,7 +221,7 @@ def update_graph_plc(
         Input("voivodship-selection", "value"),
         Input("month-selection", "start_date"),
         Input("month-selection", "end_date"),
-    ],
+    ]
 )
 def update_graph_plc(
     selected_voivod_value: str, month_selection_start: str, month_selection_end: str

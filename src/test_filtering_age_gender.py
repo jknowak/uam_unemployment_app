@@ -11,9 +11,9 @@ def test_male_data(example_data):  # pylint: disable=W0621
     :param example_data:
     :return:
     """
-    df = filter_age_gender(example_data, age=None, gender=["mężczyźni"])
+    df_x = filter_year_gender(example_data, age=None, gender=["mężczyźni"])
 
-    assert len(df["Płeć"].unique()) == 1
+    assert len(df_x["Płeć"].unique()) == 1
 
 
 def test_year_data(example_data):  # pylint: disable=W0621
@@ -22,6 +22,6 @@ def test_year_data(example_data):  # pylint: disable=W0621
     :param example_data:
     :return:
     """
-    df = filter_age_gender(example_data, year=[2017, 2020], gender=None)
+    df_x = filter_year_gender(example_data, year=[2017, 2020], gender=None)
 
-    assert len(df["Rok"].unique()) <= 3
+    assert len(df_x["Rok"].unique()) <= 3

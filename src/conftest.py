@@ -17,5 +17,5 @@ def example_data():
         encoding="utf8",
         errors="ignore",
     ) as file:
-        df = pd.read_csv(file, sep=";")
-    return df
+        df_x = pd.read_csv(file, sep=";")
+    return df_x
