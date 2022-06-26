@@ -11,7 +11,7 @@ def test_male_data(example_data):  # pylint: disable=W0621
     :param example_data:
     :return:
     """
-    df_x = filter_year_gender(example_data, age=None, gender=["mężczyźni"])
+    df_x = filter_year_gender(example_data, year=None, gender=["mężczyźni"])
 
     assert len(df_x["Płeć"].unique()) == 1
 

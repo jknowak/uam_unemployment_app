@@ -117,8 +117,8 @@ app.layout = html.Div(
             [
                 html.H3(children="Województwo", className="card"),
                 dcc.Dropdown(
-                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),
-                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),
+                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),  # pylint: disable=E1101
+                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),  # pylint: disable=E1101
                     id="voivodship-selection",
                     multi=True,
                 ),
@@ -223,7 +223,7 @@ def update_graph_plc(
         Input("month-selection", "end_date"),
     ],
 )
-def update_graph_plc(
+def update_graph_voi(
     selected_voivod_value: str, month_selection_start: str, month_selection_end: str
 ) -> Any:
     """
