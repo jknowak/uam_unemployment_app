@@ -42,26 +42,28 @@ app.layout = html.Div(
         Aplikacja napisana w Dashu
     """
         ),
+        # dropdown
         html.Div(
             [
                 html.H3(children="Płeć", className="card"),
                 dcc.Dropdown(
-                    df["plec"].unique(),
-                    df["plec"].unique(),
+                    df["Płeć"].unique(),
+                    df["Płeć"].unique(),
                     id="gender-selection",
                     multi=True,
                 ),
             ]
         ),
         html.Br(),
+        # slider
         html.Div(
             [
-                html.H3(children="Wiek", className="card"),
-                dcc.RangeSlider(
-                    min=1,
-                    max=max(df.wiek),
-                    value=[30, 80],
-                    id="age-selection",
+                html.H3(children="Płeć", className="card"),
+                dcc.Dropdown(
+                    df["Miesiące"].unique(),
+                    df["Miesiące"].unique(),
+                    id="month-selection",
+                    multi=True,
                 ),
             ]
         ),
@@ -74,24 +76,25 @@ app.layout = html.Div(
 # decorator that enables reactivity
 @app.callback(
     [Output("chart", "figure"), Output("tbl", "data")],
-    [Input("gender-selection", "value"), Input("age-selection", "value")],
+    [Input("gender-selection", "value"), Input("month-selection", "value")],
 )
-def update_graph(selected_gender_value: str, age_selection_value: str) -> Any:
+def update_graph(selected_gender_value: str, month_selection_value: str) -> Any:
     """
     Updates the plot according to the selected values
 
     :param selected_gender_value:
-    :param age_selection_value:
+    :param month_selection_value:
     :return: updated plotly figure
     """
     tmp = df.loc[  # pylint: disable=E1101
-        df.loc[:, "plec"].isin(selected_gender_value), :  # pylint: disable=E1101
+        df.loc[:, "Płeć"].isin(selected_gender_value), :  # pylint: disable=E1101
     ]
-    tmp = tmp[tmp.loc[:, "wiek"] <= age_selection_value[1]]
-    tmp = tmp[tmp.loc[:, "wiek"] >= age_selection_value[0]]
+    tmp = df.loc[  # pylint: disable=E1101
+          df.loc[:, "Miesiące"].isin(month_selection_value), :  # pylint: disable=E1101
+          ]
     tmp = (
-        tmp.groupby("dawka_ost")
-        .agg({"liczba_zaraportowanych_zgonow": sum})
+        tmp.groupby("Miesiące")
+        .agg({"Wartosc": sum})
         .reset_index()
     )
     # "dlugie obliczenia"
@@ -99,13 +102,13 @@ def update_graph(selected_gender_value: str, age_selection_value: str) -> Any:
 
     fig = px.bar(
         tmp,
-        x="dawka_ost",
-        y="liczba_zaraportowanych_zgonow",
-        color="dawka_ost",
+        x="Miesiące",
+        y="Wartosc",
+        color="Miesiące",
         title="Bezrobocie według wykształcenia",
         labels={
-            "dawka_ost": "Zaszczepienie",
-            "liczba_zaraportowanych_zgonow": "Liczba zgonów",
+            "Miesiące": "Miesiące",
+            "Wartosc": "Liczba bezrobotnych",
         },
     )
 
