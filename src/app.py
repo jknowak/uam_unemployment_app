@@ -41,7 +41,7 @@ def filter_year_gender(df_input, year, gender):
     :return:
     """
     if year is None:
-        year = (min(df_input.wiek), max(df_input.wiek))
+        year = (min(df_input.Rok), max(df_input.Rok))
     if gender is None:
         gender = df_input.Płeć.unique()
     tmp = df_input.loc[df_input.loc[:, "Płeć"].isin(gender), :]  # pylint: disable=E1101
@@ -117,8 +117,12 @@ app.layout = html.Div(
             [
                 html.H3(children="Województwo", className="card"),
                 dcc.Dropdown(
-                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),  # pylint: disable=E1101
-                    df[df.Nazwa != "POLSKA"].Nazwa.unique(),  # pylint: disable=E1101
+                    df[
+                        df.Nazwa != "POLSKA"
+                    ].Nazwa.unique(),  # pylint: disable=E1101, E1136
+                    df[
+                        df.Nazwa != "POLSKA"
+                    ].Nazwa.unique(),  # pylint: disable=E1101, E1136
                     id="voivodship-selection",
                     multi=True,
                 ),
