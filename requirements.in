@@ -1,0 +1,10 @@
+pandas
+dash
+dash_bootstrap_components
+flask_caching
+pylint
+black
+mypy
+gunicorn
+redis
+pytest
