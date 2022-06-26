@@ -1,2 +1,5 @@
 .venv
 .idea
+.ipynb
+data/raw_data/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+*.ipynb
