@@ -24,15 +24,15 @@ with open(
     encoding="utf8",
     errors="ignore",
 ) as f:
-    df1: pd.DataFrame = pd.read_csv(f, sep=";")
-
+    df: pd.DataFrame = pd.read_csv(f, sep=";")
+'''
 with open(
     "data/raw_data/bezrobocie_wyksz_plec_lata.csv",
     encoding="utf8",
     errors="ignore",
 ) as f:
     df2: pd.DataFrame = pd.read_csv(f, sep=";")
-
+'''
 # App layout
 app.layout = html.Div(
     children=[
