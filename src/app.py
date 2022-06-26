@@ -76,6 +76,7 @@ app.layout = html.Div(
             ]
         ),
         html.Div(dcc.Graph(id="chart_plc_mo")),
+        html.Div(dcc.Graph(id="chart_plc_mo_rel")),
         html.Br(),
         # dropdown wojewodztwo
         html.Div(
@@ -90,6 +91,7 @@ app.layout = html.Div(
             ]
         ),
         html.Div(dcc.Graph(id="chart_woj_mo")),
+        html.Div(dcc.Graph(id="chart_woj_mo_rel")),
         #html.Div(dash_table.DataTable(id="tbl")),
 
         # chart 2
@@ -105,7 +107,7 @@ app.layout = html.Div(
 
 # decorator that enables reactivity
 @app.callback(
-    Output("chart_plc_mo", "figure"),
+    [Output("chart_plc_mo", "figure"), Output("chart_plc_mo_rel", "figure")],
     [Input("gender-selection", "value"), Input("month-selection", "start_date"), Input("month-selection", "end_date")],
 )
 def update_graph_plc(selected_gender_value: str, month_selection_start: str, month_selection_end: str) -> Any:
@@ -126,6 +128,9 @@ def update_graph_plc(selected_gender_value: str, month_selection_start: str, mon
         .agg({"Wartosc": sum})
         .reset_index()
     )
+    tmp['Wartosc_rel'] = tmp.apply(
+        lambda x: x.Wartosc / int(tmp[(tmp.Płeć == x.Płeć) & (tmp.Data == date(2017, 1, 1))]['Wartosc']) * 100,
+        axis=1)
     # "dlugie obliczenia"
     time.sleep(3)
 
@@ -141,11 +146,23 @@ def update_graph_plc(selected_gender_value: str, month_selection_start: str, mon
         },
     )
     fig.update_layout(barmode="overlay")
-    return fig
+    fig_rel = px.line(
+        tmp,
+        x="Data",
+        y="Wartosc_rel",
+        color="Płeć",
+        title="Bezrobocie według płci - wartość w stosunku do 2017-01",
+        labels={
+            "Data": "Data",
+            "Wartosc_rel": "Relatywna l. bezrobotnych (100 = 2017-01)",
+        },
+    )
+    fig.update_layout(barmode="overlay")
+    return fig, fig_rel
 
 
 @app.callback(
-    Output("chart_woj_mo", "figure"),
+    [Output("chart_woj_mo", "figure"), Output("chart_woj_mo_rel", "figure")],
     [Input("voivodship-selection", "value"), Input("month-selection", "start_date"), Input("month-selection", "end_date")],
 )
 def update_graph_plc(selected_voivod_value: str, month_selection_start: str, month_selection_end: str) -> Any:
@@ -166,6 +183,9 @@ def update_graph_plc(selected_voivod_value: str, month_selection_start: str, mon
         .agg({"Wartosc": sum})
         .reset_index()
     )
+    tmp['Wartosc_rel'] = tmp.apply(
+        lambda x: x.Wartosc / int(tmp[(tmp.Nazwa == x.Nazwa) & (tmp.Data == date(2017, 1, 1))]['Wartosc']) * 100,
+        axis=1)
     # "dlugie obliczenia"
     time.sleep(3)
 
@@ -181,7 +201,19 @@ def update_graph_plc(selected_voivod_value: str, month_selection_start: str, mon
         },
     )
     fig.update_layout(barmode="overlay")
-    return fig
+    fig_rel = px.line(
+        tmp,
+        x="Data",
+        y="Wartosc_rel",
+        color="Nazwa",
+        title="Bezrobocie według województwa - wartość w stosunku do 2017-01",
+        labels={
+            "Data": "Data",
+            "Wartosc_rel": "Relatywna l. bezrobotnych (100 = 2017-01)",
+        },
+    )
+    fig_rel.update_layout(barmode="overlay")
+    return fig, fig_rel
 
 
 
