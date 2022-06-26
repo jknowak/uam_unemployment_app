@@ -130,8 +130,9 @@ def update_graph_plc(selected_gender_value: str, month_selection_start: str, mon
     Updates the plot according to the selected values
 
     :param selected_gender_value:
-    :param month_selection_value:
-    :return: updated plotly figure
+    :param month_selection_start:
+    :param month_selection_end:
+    :return: two updated plotly figures
     """
     tmp = df.loc[  # pylint: disable=E1101
         df.loc[:, "Płeć"].isin(selected_gender_value), :  # pylint: disable=E1101
@@ -185,8 +186,9 @@ def update_graph_plc(selected_voivod_value: str, month_selection_start: str, mon
     Updates the plot according to the selected values
 
     :param selected_voivod_value:
-    :param month_selection_value:
-    :return: updated plotly figure
+    :param month_selection_start:
+    :param month_selection_end:
+    :return: two updated plotly figures
     """
     tmp = df.loc[  # pylint: disable=E1101
         df.loc[:, "Nazwa"].isin(selected_voivod_value), :  # pylint: disable=E1101
@@ -229,7 +231,6 @@ def update_graph_plc(selected_voivod_value: str, month_selection_start: str, mon
     )
     fig_rel.update_layout(barmode="overlay")
     return fig, fig_rel
-
 
 
 if __name__ == "__main__":

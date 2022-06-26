@@ -1,16 +1,16 @@
-## Unemployment in Poland, before and after the pandemic
+## Bezrobocie w Polsce, przed i w trakcie pandemii COVID-19
 
-This is a dash app written for the classes at the Adam Mickiewicz University conducted by @psobczyk.
+Jest to aplikacja napisana w Dashu na zaliczenie zajęć na Uniwersytecie Adama Mickiewicza prowadzonych przez @psobczyk.
 
-### How to run the app?
+### Jak uruchomić aplikację?
 
 ```bash
 python3 src/app.py
 ```
 
-and visit http://127.0.0.1:8050/ in your web browser.
+i odwiedź http://127.0.0.1:8050/ w przeglądarce.
 
-### Building and running basic app docker
+### Budowanie i uruchamianie aplikacji w Dockerze
 
 ```bash
 docker build -t uam-dash .
@@ -18,18 +18,6 @@ docker build -t uam-dash .
 docker run --rm -p 8000:8000 uam-dash
 ```
 
-### Running redis based app with Docker
-
-```bash
-docker-compose build
-docker-compose up
-```
-
-Cleanup
-
-```bash
-docker-compose down
-```
 
 ### How to contribute
 
