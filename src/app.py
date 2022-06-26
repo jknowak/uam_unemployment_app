@@ -42,6 +42,7 @@ app.layout = html.Div(
         Aplikacja napisana w Dashu
     """
         ),
+        # chart 1
         # dropdown
         html.Div(
             [
@@ -69,6 +70,15 @@ app.layout = html.Div(
         ),
         html.Div(dcc.Graph(id="chart")),
         html.Div(dash_table.DataTable(id="tbl")),
+
+        # chart 2
+
+        # chart 3
+
+        # chart 4
+
+        # chart 5
+
     ]
 )
 
@@ -78,7 +88,7 @@ app.layout = html.Div(
     [Output("chart", "figure"), Output("tbl", "data")],
     [Input("gender-selection", "value"), Input("month-selection", "value")],
 )
-def update_graph(selected_gender_value: str, month_selection_value: str) -> Any:
+def update_graph_1(selected_gender_value: str, month_selection_value: str) -> Any:
     """
     Updates the plot according to the selected values
 
