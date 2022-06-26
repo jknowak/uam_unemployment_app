@@ -3,8 +3,11 @@ Loads and prepares two data sources
 """
 from typing import Tuple
 import pandas as pd
-from helpers import load_raw_data, add_proper_date
 
+try:
+    from helpers import load_raw_data, add_proper_date
+except ImportError:
+    from .helpers import load_raw_data, add_proper_date  # pylint: disable=E0402
 
 FILE1 = "bezrobocie_plec_miesiecznie.csv"
 FILE2 = "bezrobocie_wyksz_plec_lata.csv"

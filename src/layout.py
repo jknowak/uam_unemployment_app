@@ -13,8 +13,12 @@ import plotly.express as px  # type: ignore
 from dash import html, dcc, dash_table  # type: ignore
 from dash.dependencies import Input, Output  # type: ignore
 
-from maindash import app
-from data_pipeline import prep_data
+try:
+    from maindash import app
+    from data_pipeline import prep_data
+except ImportError:
+    from .maindash import app  # pylint: disable=E0402
+    from .data_pipeline import prep_data  # pylint: disable=E0402
 
 df, df2 = prep_data()
 
