@@ -31,14 +31,15 @@ with open(
 ) as f:
     df: pd.DataFrame = pd.read_csv(f, sep=";")
     df['Data'] = df.apply(lambda x: date(x['Rok'], months_dict.get(x['Miesiące']), 1), axis=1)
-'''
+
 with open(
     "data/raw_data/bezrobocie_wyksz_plec_lata.csv",
     encoding="utf8",
     errors="ignore",
 ) as f:
     df2: pd.DataFrame = pd.read_csv(f, sep=";")
-'''
+df2 = df2.iloc[:20,2:6]
+
 # App layout
 app.layout = html.Div(
     children=[
@@ -95,7 +96,21 @@ app.layout = html.Div(
         #html.Div(dash_table.DataTable(id="tbl")),
 
         # chart 2
-
+        html.Div([
+            dash_table.DataTable(
+                columns = [{'name': col, 'id': col} for col in df2.columns],
+                data = df2.to_dict('records'),
+                editable=True,
+                #filter_action='native',
+                sort_action='native',
+                page_action='native',
+                page_current=0,
+                page_size=20,
+                column_selectable='multi',
+                row_selectable='multi',
+                row_deletable=True
+            )
+        ])
         # chart 3
 
         # chart 4
