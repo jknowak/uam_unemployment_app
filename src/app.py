@@ -128,21 +128,23 @@ app.layout = html.Div(
         html.Div(dcc.Graph(id="chart_woj_mo_rel")),
         # html.Div(dash_table.DataTable(id="tbl")),
         # chart 2
-        html.Div([
-            dash_table.DataTable(
-                columns = [{'name': col, 'id': col} for col in df2.columns],
-                data = df2.to_dict('records'),
-                editable=True,
-                #filter_action='native',
-                sort_action='native',
-                page_action='native',
-                page_current=0,
-                page_size=20,
-                column_selectable='multi',
-                #row_selectable='multi',
-                #row_deletable=True
-            )
-        ])
+        html.Div(
+            [
+                dash_table.DataTable(
+                    columns=[{"name": col, "id": col} for col in df2.columns],
+                    data=df2.to_dict("records"),
+                    editable=True,
+                    # filter_action='native',
+                    sort_action="native",
+                    page_action="native",
+                    page_current=0,
+                    page_size=20,
+                    column_selectable="multi",
+                    # row_selectable='multi',
+                    # row_deletable=True
+                )
+            ]
+        )
         # chart 3
         # chart 4
         # chart 5
