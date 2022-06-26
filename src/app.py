@@ -58,7 +58,7 @@ with open(
     encoding="utf8",
     errors="ignore",
 ) as f:
-    df: pd.DataFrame = pd.read_csv(f, sep=";")
+    df = pd.read_csv(f, sep=";")
     df["Data"] = df.apply(
         lambda x: date(x["Rok"], months_dict.get(x["Miesiące"]), 1), axis=1
     )
@@ -68,7 +68,7 @@ with open(
     encoding="utf8",
     errors="ignore",
 ) as f:
-    df2: pd.DataFrame = pd.read_csv(f, sep=";")
+    df2 = pd.read_csv(f, sep=";")
 df2 = df2.iloc[:20, 2:6]
 
 # App layout
